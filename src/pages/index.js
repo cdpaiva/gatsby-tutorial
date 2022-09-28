@@ -1,8 +1,8 @@
 // Step 1: Import React
 import * as React from "react";
-import { Link } from "gatsby";
 import Layout from "../components/layout";
 import { StaticImage } from "gatsby-plugin-image";
+import Seo from "../components/seo";
 
 // Step 2: Define your component
 const IndexPage = () => {
@@ -19,7 +19,7 @@ const IndexPage = () => {
 
 // The Gatsby Head API is used by exporting a named function called Head in your pages and page templates
 // It lets you add document metadata to the generated pages
-export const Head = () => <title>Home Page</title>;
+export const Head = () => <Seo title="Home Page" />;
 
 // Step 3: Export your component
 export default IndexPage;
