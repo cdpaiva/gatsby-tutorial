@@ -5,26 +5,33 @@ import Seo from "../components/seo";
 
 const BlogPage = ({ data }) => {
   return (
-    <Layout pageTitle="Blog post list">
-      <ul>
-        {data.allFile.nodes.map((node) => (
-          <li key={node.name}>{node.name}</li>
-        ))}
-      </ul>
+    <Layout pageTitle="My Blog Posts">
+      {data.allMarkdownRemark.nodes.map((node) => (
+        <article key={node.id}>
+          <h2>{node.frontmatter.title}</h2>
+          <p>Posted: {node.frontmatter.date}</p>
+          <div dangerouslySetInnerHTML={{ __html: node.html }}></div>
+        </article>
+      ))}
     </Layout>
   );
 };
 
 export const query = graphql`
   query {
-    allFile(filter: { sourceInstanceName: { eq: "blog" } }) {
+    allMarkdownRemark(sort: { fields: frontmatter___date }) {
       nodes {
-        name
+        html
+        id
+        frontmatter {
+          title
+          date
+        }
       }
     }
   }
 `;
 
-export const Head = () => <Seo title="Posts" />;
+export const Head = () => <Seo title="My Blog Posts" />;
 
 export default BlogPage;
